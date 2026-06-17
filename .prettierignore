@@ -1,0 +1,7 @@
+node_modules
+dist
+shots
+scripts
+server/data
+*.log
+package-lock.json
