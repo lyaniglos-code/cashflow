@@ -76,13 +76,6 @@ export default function BankConnection({ onChange }) {
               {busy === 'sync' ? 'Syncing…' : '↻ Sync now'}
             </button>
             <button
-              className="btn-ghost btn-sm"
-              onClick={() => act('sim', api.plaidSimulate)}
-              disabled={busy === 'sim'}
-            >
-              {busy === 'sim' ? '…' : '⚡ Simulate a live transaction'}
-            </button>
-            <button
               className="btn-ghost btn-sm text-red-300"
               onClick={() => act('disc', api.plaidDisconnect)}
               disabled={busy === 'disc'}
@@ -91,8 +84,8 @@ export default function BankConnection({ onChange }) {
             </button>
           </div>
           <p className="text-xs text-slate-500">
-            New transactions push to your dashboard live. (Locally, use Sync now / Simulate; deployed, Plaid webhooks do
-            it automatically.)
+            New transactions push to your dashboard live as your bank reports them. Use Sync now to pull the latest
+            immediately.
           </p>
         </div>
       )}

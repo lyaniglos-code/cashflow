@@ -50,7 +50,6 @@ export const api = {
   listTransactions: (limit) => request(`/transactions${limit ? `?limit=${limit}` : ''}`),
   transactionSummary: () => request('/transactions/summary'),
   uploadCsv: (formData) => request('/transactions/upload', { method: 'POST', body: formData, isForm: true }),
-  connectQuickBooks: () => request('/transactions/quickbooks-connect', { method: 'POST', body: {} }),
   clearTransactions: () => request('/transactions', { method: 'DELETE' }),
   addManualTxn: (body) => request('/transactions/manual', { method: 'POST', body }),
   addRecurring: (body) => request('/transactions/recurring', { method: 'POST', body }),
@@ -90,7 +89,6 @@ export const api = {
   plaidExchange: (publicToken, institution) =>
     request('/plaid/exchange', { method: 'POST', body: { public_token: publicToken, institution } }),
   plaidSync: () => request('/plaid/sync', { method: 'POST', body: {} }),
-  plaidSimulate: () => request('/plaid/sandbox/simulate', { method: 'POST', body: {} }),
   plaidDisconnect: () => request('/plaid/connection', { method: 'DELETE' }),
 };
 

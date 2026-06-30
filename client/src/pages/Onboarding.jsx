@@ -150,15 +150,6 @@ export default function Onboarding() {
     }
   }
 
-  async function loadDemo() {
-    setBusy(true);
-    try {
-      await api.connectQuickBooks();
-      navigate('/');
-    } finally {
-      setBusy(false);
-    }
-  }
 
   const { labels, active } = stepperFor(screen, mode);
 
@@ -264,12 +255,6 @@ export default function Onboarding() {
                   </button>
                 </div>
               </div>
-              <p className="text-center text-xs text-slate-500">
-                Just exploring?{' '}
-                <button className="text-teal-soft hover:underline" onClick={loadDemo} disabled={busy}>
-                  Load demo data
-                </button>
-              </p>
             </div>
           )}
 

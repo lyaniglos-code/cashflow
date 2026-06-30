@@ -32,7 +32,6 @@ export default function Dashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [horizon, setHorizon] = useState(90);
-  const [connecting, setConnecting] = useState(false);
 
   const [summary, setSummary] = useState(null);
   const [recommendations, setRecommendations] = useState(null);
@@ -124,19 +123,6 @@ export default function Dashboard() {
     return () => es && es.close();
   }, [refetchLive]);
 
-  async function connect() {
-    setConnecting(true);
-    try {
-      await api.connectQuickBooks();
-      const d = await loadDashboard();
-      if (d) {
-        loadAi(Boolean(d.shortfall));
-        loadPlans();
-      }
-    } finally {
-      setConnecting(false);
-    }
-  }
 
   async function applyPlan(plan) {
     // Recompute against current data, then overlay the scenario line.
@@ -179,15 +165,15 @@ export default function Dashboard() {
           <div className="mb-3 text-4xl">📈</div>
           <h2 className="text-lg font-bold text-white">No data yet</h2>
           <p className="mx-auto mt-2 max-w-sm text-sm text-slate-400">
-            Set up your business in a guided 3-step flow, or load demo data to explore everything instantly.
+            Set up your business in a guided 3-step flow, connect your bank, or import a CSV to start forecasting.
           </p>
           <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link to="/onboarding" className="btn-primary">
               Set up my business →
             </Link>
-            <button className="btn-ghost" onClick={connect} disabled={connecting}>
-              {connecting ? 'Loading…' : '⚡ Load demo data'}
-            </button>
+            <Link to="/upload" className="btn-ghost">
+              Import a CSV
+            </Link>
           </div>
           <div className="mt-4 flex justify-center">
             <ConnectBank
@@ -227,9 +213,6 @@ export default function Dashboard() {
             title="Clear data and walk through onboarding"
           >
             Start fresh
-          </button>
-          <button className="btn-ghost btn-sm" onClick={connect} disabled={connecting}>
-            {connecting ? 'Refreshing…' : '↻ Demo data'}
           </button>
         </div>
       }

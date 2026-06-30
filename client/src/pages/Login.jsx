@@ -5,8 +5,8 @@ import { LogoMark } from '../components/Logo.jsx';
 
 export default function Login() {
   const { login } = useAuth();
-  const [email, setEmail] = useState('demo@bistro.com');
-  const [password, setPassword] = useState('demo1234');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -58,9 +58,6 @@ export default function Login() {
           <button className="btn-primary w-full" disabled={busy}>
             {busy ? 'Signing in…' : 'Sign in'}
           </button>
-          <div className="rounded-lg border border-white/5 bg-white/5 px-3 py-2 text-center text-xs text-slate-400">
-            Demo account is pre-filled — just click <span className="font-semibold text-teal-soft">Sign in</span>.
-          </div>
           <p className="text-center text-sm text-slate-400">
             No account?{' '}
             <Link to="/register" className="font-semibold text-teal-soft hover:underline">

@@ -4,7 +4,6 @@ import { parse } from 'csv-parse/sync';
 import { nanoid } from 'nanoid';
 import db from '../db.js';
 import { requireAuth } from '../auth.js';
-import { generateRestaurantDataset } from '../seed.js';
 import { emitRefresh } from '../bus.js';
 
 const router = Router();
@@ -110,26 +109,6 @@ router.post('/upload', upload.single('file'), (req, res) => {
   res.json({ imported, skipped: errors.length, errors: errors.slice(0, 10) });
 });
 
-// Mock "Connect QuickBooks": loads the seeded restaurant demo dataset.
-router.post('/quickbooks-connect', (req, res) => {
-  const replace = req.body?.replace !== false; // default: replace existing
-  if (replace) {
-    db.prepare('DELETE FROM transactions WHERE user_id = ?').run(req.userId);
-  }
-  const rows = generateRestaurantDataset({ months: 6 });
-  const insert = db.prepare(
-    `INSERT INTO transactions (id, user_id, date, description, amount, category, source)
-     VALUES (?, ?, ?, ?, ?, ?, ?)`
-  );
-  const run = db.transaction((items) => {
-    for (const t of items) {
-      insert.run(nanoid(), req.userId, t.date, t.description, t.amount, t.category, 'quickbooks');
-    }
-  });
-  run(rows);
-  emitRefresh(req.userId, { source: 'quickbooks-demo', added: rows.length });
-  res.json({ imported: rows.length, source: 'quickbooks-demo' });
-});
 
 // Add a single manual transaction.
 router.post('/manual', (req, res) => {

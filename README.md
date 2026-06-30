@@ -1,10 +1,10 @@
 # 💚 ForecastOS — *Your business finances have a heartbeat.*
 
-An AI-powered SaaS web app that helps small-business owners forecast cash flow. Enter your business data through a guided setup (or load demo data), and the app projects your cash balance 90 days forward, tracks your vital signs (Cash Position · Burn Rate · Revenue · Runway), flags upcoming shortfalls, and uses the **Claude API** to explain the numbers and **build statistically accurate plans** to fix them.
+An AI-powered SaaS web app that helps small-business owners forecast cash flow. Enter your business data through a guided setup (connect a bank or import a CSV), and the app projects your cash balance 90 days forward, tracks your vital signs (Cash Position · Burn Rate · Revenue · Runway), flags upcoming shortfalls, and uses the **Claude API** to explain the numbers and **build statistically accurate plans** to fix them.
 
 Built with **React + Tailwind + Recharts** (frontend), **Node/Express + SQLite** (backend), and **Claude (`claude-sonnet-4-6`)** for AI insights. Dark charcoal / electric-teal theme with a pulse-to-dollar logo.
 
-> **Runs out of the box.** A demo restaurant business with 6 months of realistic transactions is seeded automatically, and the app works fully **even without an Anthropic API key** (it falls back to built-in template insights, and plans can be built from the Scenario Planner). Add a key to unlock the conversational planning assistant and real Claude-generated narratives.
+> **Runs out of the box.** With `DEMO_MODE=true`, a demo restaurant business with 6 months of realistic transactions is seeded for you, and the app works fully **even without an Anthropic API key** (it falls back to built-in template insights, and plans can be built from the Scenario Planner). Add a key to unlock the conversational planning assistant and real Claude-generated narratives.
 
 ---
 
@@ -78,16 +78,14 @@ The Vite dev server proxies `/api/*` to the Express backend, so there's no CORS 
 
 ### Demo login
 
-A demo account is seeded automatically:
+The demo account is **off by default** so real/customer instances start clean. Set `DEMO_MODE=true` in your environment to seed it:
 
 ```
 Email:    demo@bistro.com
 Password: demo1234
 ```
 
-It comes pre-loaded with 6 months of restaurant transactions, so the dashboard, shortfall alert, digest, and scenario planner are all populated immediately. (The login form is pre-filled with these credentials.)
-
-You can also register a fresh account and click **"Connect QuickBooks (demo data)"** on the dashboard to load the same dataset.
+When `DEMO_MODE=true`, this account is created on boot pre-loaded with 6 months of restaurant transactions, so the dashboard, shortfall alert, digest, and scenario planner are all populated immediately. With `DEMO_MODE` unset, no demo account exists and the login form starts empty — users register and add their own data (guided setup, live bank, or CSV).
 
 ---
 

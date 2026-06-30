@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 import db from '../db.js';
 import { requireAuth } from '../auth.js';
 import { encrypt } from '../crypto.js';
-import { emitRefresh } from '../bus.js';
 import { plaidEnabled, plaidClient, plaidEnv, syncItem } from '../plaid.js';
 
 const router = Router();
@@ -93,28 +92,6 @@ router.post('/sync', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.response?.data?.error_message || err.message });
   }
-});
-
-// Dev helper: drop a synthetic "live" transaction into the connected account so
-// the live SSE pipeline is demoable locally without a public webhook URL.
-router.post('/sandbox/simulate', (req, res) => {
-  const conn = getConnection(req.userId);
-  if (!conn) return res.status(400).json({ error: 'Connect a bank first' });
-  const samples = [
-    { description: 'Square POS deposit', amount: 1200, category: 'Income' },
-    { description: 'Sysco supplier order', amount: -640, category: 'Food Costs' },
-    { description: 'Stripe payout', amount: 850, category: 'Income' },
-    { description: 'Utility autopay', amount: -180, category: 'Utilities' },
-  ];
-  const s = samples[Math.floor(Math.random() * samples.length)];
-  const today = new Date().toISOString().slice(0, 10);
-  db.prepare(
-    `INSERT INTO transactions (id, user_id, date, description, amount, category, source, external_id)
-     VALUES (?, ?, ?, ?, ?, ?, 'plaid', ?)`
-  ).run(nanoid(), req.userId, today, s.description, s.amount, s.category, `sim_${nanoid()}`);
-  db.prepare("UPDATE connections SET last_synced_at = datetime('now') WHERE id = ?").run(conn.id);
-  emitRefresh(req.userId, { source: 'sandbox-sim', added: 1 });
-  res.json({ ok: true, transaction: { ...s, date: today } });
 });
 
 router.delete('/connection', async (req, res) => {

@@ -17,7 +17,6 @@ export default function Upload() {
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
-  const [connecting, setConnecting] = useState(false);
 
   async function onUpload(e) {
     e.preventDefault();
@@ -41,40 +40,11 @@ export default function Upload() {
     }
   }
 
-  async function connect() {
-    setConnecting(true);
-    setError('');
-    try {
-      const res = await api.connectQuickBooks();
-      setResult({ imported: res.imported, skipped: 0, source: 'quickbooks' });
-      setTimeout(() => navigate('/'), 800);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setConnecting(false);
-    }
-  }
-
   return (
-    <Layout title="Import Data" subtitle="Upload a bank CSV or load demo data">
+    <Layout title="Import Data" subtitle="Connect your bank or upload a CSV">
       <div className="mx-auto grid max-w-3xl gap-5">
         {/* Live bank (Plaid) */}
         <BankConnection onChange={() => {}} />
-
-        {/* Mock QuickBooks */}
-        <div className="card p-6">
-          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-            <div>
-              <h3 className="text-base font-bold text-white">⚡ Connect QuickBooks</h3>
-              <p className="mt-1 text-sm text-slate-400">
-                Instantly load a realistic 6-month restaurant dataset so you can explore every feature.
-              </p>
-            </div>
-            <button className="btn-primary whitespace-nowrap" onClick={connect} disabled={connecting}>
-              {connecting ? 'Connecting…' : 'Connect (demo)'}
-            </button>
-          </div>
-        </div>
 
         {/* CSV upload */}
         <form onSubmit={onUpload} className="card p-6">

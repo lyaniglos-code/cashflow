@@ -87,8 +87,10 @@ const smsCodeLimiter = rateLimit({
   message: { error: 'Too many verification-code requests — please try again later.' },
 });
 
+const DEMO_MODE = process.env.DEMO_MODE === 'true';
+
 app.get('/api/health', (req, res) => {
-  res.json({ ok: true, aiEnabled: aiEnabled(), plaidEnabled: plaidEnabled() });
+  res.json({ ok: true, aiEnabled: aiEnabled(), plaidEnabled: plaidEnabled(), demoMode: DEMO_MODE });
 });
 
 app.use('/api/auth', authLimiter);
@@ -168,7 +170,9 @@ function ensureDemoSeed() {
   }
 }
 
-ensureDemoSeed();
+// Demo seeding is opt-in: customer instances start clean. Set DEMO_MODE=true to
+// create demo@bistro.com / demo1234 pre-loaded with the sample restaurant data.
+if (DEMO_MODE) ensureDemoSeed();
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
@@ -180,6 +184,8 @@ app.listen(PORT, () => {
   console.log(
     `  Twilio SMS: ${twilioEnabled() ? 'ENABLED' : 'SIMULATION — messages logged to console (add TWILIO_* to send real SMS)'}`
   );
-  console.log(`  Demo login: demo@bistro.com / demo1234\n`);
+  console.log(
+    `  Demo mode: ${DEMO_MODE ? 'ON — login demo@bistro.com / demo1234' : 'OFF (set DEMO_MODE=true to enable)'}\n`
+  );
   startCron();
 });

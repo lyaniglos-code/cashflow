@@ -53,9 +53,10 @@ router.post('/send-code', async (req, res) => {
     req.userId
   );
   const result = await sendSms(phone, `Your ForecastOS verification code is ${code}. It expires in 10 minutes.`);
-  // In simulation/testing (no live Twilio), return the code so the flow is
-  // testable without a real handset. Remove/guard this in production.
-  res.json({ sent: true, simulated: result.simulated, devCode: result.simulated ? code : undefined });
+  // Only echo the code back to the client in non-production simulation (no live
+  // Twilio), so local testing works without a handset. Never exposed in prod.
+  const exposeCode = result.simulated && process.env.NODE_ENV !== 'production';
+  res.json({ sent: true, simulated: result.simulated, devCode: exposeCode ? code : undefined });
 });
 
 // Verify the code; on success store the phone, mark verified, opt in.

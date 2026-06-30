@@ -66,8 +66,7 @@ export default function Analytics() {
           <div className="mb-3 text-4xl">📊</div>
           <h2 className="text-lg font-bold text-white">Need a bit more history</h2>
           <p className="mx-auto mt-2 max-w-sm text-sm text-slate-400">
-            These analytics need at least two months of transactions. Connect a bank, upload a CSV, or load demo data to
-            see them.
+            These analytics need at least two months of transactions. Connect a bank or upload a CSV to see them.
           </p>
           <Link to="/upload" className="btn-primary mt-5 inline-flex">
             Add data →
