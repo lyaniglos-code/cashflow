@@ -1,4 +1,4 @@
-# 💚 CashFlow — *Your business finances have a heartbeat.*
+# 💚 ForecastOS — *Your business finances have a heartbeat.*
 
 An AI-powered SaaS web app that helps small-business owners forecast cash flow. Enter your business data through a guided setup (or load demo data), and the app projects your cash balance 90 days forward, tracks your vital signs (Cash Position · Burn Rate · Revenue · Runway), flags upcoming shortfalls, and uses the **Claude API** to explain the numbers and **build statistically accurate plans** to fix them.
 
@@ -156,7 +156,7 @@ The app exchanges the token, imports the bank's transactions, and recomputes you
 
 ## SMS alerts (Twilio)
 
-CashFlow can text you when cash flow needs attention. Four alert types, each independently toggleable, configured under **Settings → SMS Alerts**.
+ForecastOS can text you when cash flow needs attention. Four alert types, each independently toggleable, configured under **Settings → SMS Alerts**.
 
 ### Works with zero setup (simulation mode)
 With **no Twilio credentials**, SMS runs in **simulation mode**: messages are printed to the server console and the verification code is shown in the UI — so you can exercise the entire flow (verify a number, fire every alert) without a Twilio account. Look for `[SMS simulated] → +1…` lines in the server log.

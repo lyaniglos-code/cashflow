@@ -37,7 +37,7 @@ export default function Digest() {
               <span className="text-teal">
                 <LogoMark size={16} />
               </span>
-              <span>Cash Flow</span>
+              <span>ForecastOS</span>
             </div>
             <h2 className="mt-2 text-xl font-bold text-white">This Week's Cash Flow Report</h2>
             <p className="mt-1 text-sm text-slate-400">

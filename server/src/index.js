@@ -172,7 +172,7 @@ ensureDemoSeed();
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`\n  Cash Flow Forecaster API running on http://localhost:${PORT}`);
+  console.log(`\n  ForecastOS API running on http://localhost:${PORT}`);
   console.log(`  AI (Claude): ${aiEnabled() ? 'ENABLED' : 'DISABLED — using template fallback'}`);
   console.log(
     `  Plaid: ${plaidEnabled() ? `ENABLED (${process.env.PLAID_ENV || 'sandbox'})` : 'DISABLED — add PLAID_CLIENT_ID/SECRET to enable live bank data'}`

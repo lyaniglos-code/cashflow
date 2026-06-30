@@ -50,7 +50,7 @@ router.post('/link-token', async (req, res) => {
   try {
     const resp = await plaidClient().linkTokenCreate({
       user: { client_user_id: req.userId },
-      client_name: 'CashFlow',
+      client_name: 'ForecastOS',
       products: PRODUCTS,
       country_codes: COUNTRY_CODES,
       language: 'en',

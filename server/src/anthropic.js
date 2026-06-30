@@ -249,7 +249,7 @@ export async function chatPlanner(messages, ctx, runImpact) {
   }
 
   const recs = (ctx.recommendations || []).map((r, i) => `${i + 1}. ${r}`).join('\n');
-  const system = `You are CashFlow's planning assistant for a small business owner. Your SOLE purpose is to (a) clarify the app's cash-flow recommendations in plain English and (b) help build concrete, statistically accurate plans to improve cash flow. Stay strictly on cash flow / financial planning for THIS business; politely decline unrelated requests.
+  const system = `You are ForecastOS's planning assistant for a small business owner. Your SOLE purpose is to (a) clarify the app's cash-flow recommendations in plain English and (b) help build concrete, statistically accurate plans to improve cash flow. Stay strictly on cash flow / financial planning for THIS business; politely decline unrelated requests.
 
 When the user wants to change, improve, or avoid a problem with their cash flow, you MUST call the propose_plan tool so the real forecasting engine computes the impact — never estimate the numbers yourself. After the tool returns, explain the result in 2-4 plain sentences using the engine's figures. Be concise, warm, and practical. No markdown headers.
 

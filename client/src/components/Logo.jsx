@@ -52,7 +52,7 @@ export default function Logo({ size = 'md', showWord = true }) {
       </span>
       {showWord && (
         <div className="leading-tight">
-          <div className="text-sm font-bold tracking-tight text-white">CashFlow</div>
+          <div className="text-sm font-bold tracking-tight text-white">ForecastOS</div>
           <div className="text-[11px] font-medium text-slate-400">Financial pulse</div>
         </div>
       )}

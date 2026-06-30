@@ -52,7 +52,7 @@ router.post('/send-code', async (req, res) => {
     expires,
     req.userId
   );
-  const result = await sendSms(phone, `Your CashFlow verification code is ${code}. It expires in 10 minutes.`);
+  const result = await sendSms(phone, `Your ForecastOS verification code is ${code}. It expires in 10 minutes.`);
   // In simulation/testing (no live Twilio), return the code so the flow is
   // testable without a real handset. Remove/guard this in production.
   res.json({ sent: true, simulated: result.simulated, devCode: result.simulated ? code : undefined });

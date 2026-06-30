@@ -2,7 +2,7 @@
   "name": "cashflow-forecaster",
   "version": "1.0.0",
   "private": true,
-  "description": "Micro-Business Cash Flow Forecaster — AI-powered cash flow projections for small businesses",
+  "description": "ForecastOS — AI-powered cash flow projections for small businesses",
   "type": "module",
   "engines": {
     "node": "20.x"

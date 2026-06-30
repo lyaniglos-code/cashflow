@@ -74,7 +74,7 @@ export async function checkShortfall(user, { force = false } = {}) {
     }
   }
   const cause = await smsBlurb('shortfall_cause', aiContext(f));
-  const body = `⚠ CashFlow Alert: Projected to be ${money(deficit)} short by ${shortDate(f.shortfall.date)} (${f.shortfall.daysUntil} days). Main cause: ${cause}. View: ${link('/')}`;
+  const body = `⚠ ForecastOS Alert: Projected to be ${money(deficit)} short by ${shortDate(f.shortfall.date)} (${f.shortfall.daysUntil} days). Main cause: ${cause}. View: ${link('/')}`;
   return dispatch(user, 'shortfall', deficit, body);
 }
 
@@ -230,7 +230,7 @@ async function forceShortfall(user) {
     days = Math.round((new Date(low.date) - new Date()) / 86400000);
   }
   const cause = await smsBlurb('shortfall_cause', aiContext(f));
-  const body = `⚠ CashFlow Alert: Projected to be ${money(deficit)} short by ${shortDate(date)} (${days} days). Main cause: ${cause}. View: ${link('/')}`;
+  const body = `⚠ ForecastOS Alert: Projected to be ${money(deficit)} short by ${shortDate(date)} (${days} days). Main cause: ${cause}. View: ${link('/')}`;
   return dispatch(user, 'shortfall', deficit, body, { bypassQuiet: true });
 }
 async function forceBreach(user) {

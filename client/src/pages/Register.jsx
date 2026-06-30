@@ -39,7 +39,7 @@ export default function Register() {
           <span className="text-teal">
             <LogoMark size={42} />
           </span>
-          <div className="mt-2 text-xl font-bold tracking-tight text-white">CashFlow</div>
+          <div className="mt-2 text-xl font-bold tracking-tight text-white">ForecastOS</div>
           <div className="text-xs text-slate-400">Your business finances have a heartbeat.</div>
         </div>
 
